@@ -40,10 +40,15 @@ class _NonLoginHomePageState extends State<NonLoginHomePage> {
 
   @override
   void initState() {
-    _requestPermission();
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() async {
+    await _requestPermission();
     location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
     location.enableBackgroundMode(enable: true);
-    super.initState();
+    super.didChangeDependencies();
   }
 
   void _getLocation() async {
@@ -82,13 +87,11 @@ class _NonLoginHomePageState extends State<NonLoginHomePage> {
     });
   }
 
-  void _requestPermission() async {
-    var status = await Permission.location.request();
-    if (status.isGranted) {
-      print('done');
-    } else if (status.isDenied) {
-      _requestPermission();
-    } else if (status.isPermanentlyDenied) {
+  Future<void> _requestPermission() async {
+    // var status = await Permission.location.request();
+    if (await Permission.location.request().isGranted) {
+      print("DONE!!!!!");
+    } else if (await Permission.location.isPermanentlyDenied) {
       openAppSettings();
     }
   }
@@ -112,6 +115,9 @@ class _NonLoginHomePageState extends State<NonLoginHomePage> {
                 return ListView.builder(
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (context, index) {
+                    if (snapshot.data?.docs.length == 0) {
+                      return Text('Nothing to Show');
+                    }
                     return ListTile(
                       title: Text(snapshot.data!.docs[index]['name'].toString()),
                       subtitle: Row(

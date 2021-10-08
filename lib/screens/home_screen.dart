@@ -42,11 +42,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    _requestPermission();
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() async {
+    await _requestPermission();
     location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
     location.enableBackgroundMode(enable: true);
-
-    super.initState();
+    super.didChangeDependencies();
   }
 
   Future<void> _displayTextInputDialog(BuildContext context) async {
@@ -126,13 +130,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _requestPermission() async {
-    var status = await Permission.location.request();
-    if (status.isGranted) {
-      print('done');
-    } else if (status.isDenied) {
-      _requestPermission();
-    } else if (status.isPermanentlyDenied) {
+  Future<void> _requestPermission() async {
+    // var status = await Permission.location.request();
+    if (await Permission.location.request().isGranted) {
+      print("DONE!!!!!");
+    } else if (await Permission.location.isPermanentlyDenied) {
       openAppSettings();
     }
   }
