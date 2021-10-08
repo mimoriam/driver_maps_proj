@@ -1,4 +1,3 @@
-import 'package:driver_maps_proj/state/root_state.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -24,70 +23,27 @@ import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 
 // Entry Point:
-class MyHomePage extends StatefulWidget {
+class NonLoginHomePage extends StatefulWidget {
   final FirebaseAuth auth;
   final FirebaseFirestore firestore;
 
-  const MyHomePage({required this.auth, required this.firestore});
+  const NonLoginHomePage({required this.auth, required this.firestore});
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _NonLoginHomePageState createState() => _NonLoginHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _NonLoginHomePageState extends State<NonLoginHomePage> {
   final _formKey = GlobalKey<FormBuilderState>();
   final loc.Location location = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
-  TextEditingController _textFieldController = TextEditingController();
 
   @override
   void initState() {
     _requestPermission();
     location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
     location.enableBackgroundMode(enable: true);
-
     super.initState();
-  }
-
-  Future<void> _displayTextInputDialog(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('TextField in Dialog'),
-            content: TextField(
-              onChanged: (value) {
-                setState(() {
-                  Provider.of<RootStateProvider>(context).changeNames(value);
-                });
-              },
-              controller: _textFieldController,
-              decoration: InputDecoration(hintText: "Text Field in Dialog"),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                color: Colors.red,
-                textColor: Colors.white,
-                child: Text('CANCEL'),
-                onPressed: () {
-                  setState(() {
-                    Navigator.pop(context);
-                  });
-                },
-              ),
-              FlatButton(
-                color: Colors.green,
-                textColor: Colors.white,
-                child: Text('OK'),
-                onPressed: () {
-                  setState(() {
-                    Navigator.pop(context);
-                  });
-                },
-              ),
-            ],
-          );
-        });
   }
 
   void _getLocation() async {
@@ -139,72 +95,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // if (Provider.of<RootStateProvider>(context).name == "Null" ||
-    //     Provider.of<RootStateProvider>(context).name == "null") {
-    //   Future.delayed(Duration.zero, () => _displayTextInputDialog(context));
-    // }
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home"),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              final String? returnValue = await Auth(auth: widget.auth).signOut();
-              if (returnValue == "Success") {}
-            },
-            icon: const Icon(Icons.add_to_home_screen),
-          )
-        ],
+        actions: const [],
       ),
       body: Column(
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: FormBuilder(
-          //     key: _formKey,
-          //     child: FormBuilderTextField(
-          //       name: 'NAME',
-          //       decoration: InputDecoration(
-          //         labelText: Provider.of<RootStateProvider>(context).name,
-          //         border: OutlineInputBorder(
-          //           borderRadius: BorderRadius.circular(20.0),
-          //         ),
-          //         labelStyle: const TextStyle(),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // ElevatedButton(
-          //   child: const Text("Change names"),
-          //   onPressed: () async {
-          //     Provider.of<RootStateProvider>(context, listen: false)
-          //         .changeNames(_formKey.currentState!.fields['NAME']!.value);
-          //     await FirebaseFirestore.instance
-          //         .collection('location')
-          //         .doc(widget.auth.currentUser!.email)
-          //         .update({'name': Provider.of<RootStateProvider>(context, listen: false).name});
-          //     FocusScope.of(context).unfocus();
-          //     _formKey.currentState!.reset();
-          //   },
-          // ),
-          TextButton(
-            onPressed: () {
-              _getLocation();
-            },
-            child: const Text('Add location'),
-          ),
-          TextButton(
-            onPressed: () {
-              _listenLocation();
-            },
-            child: const Text('Enable live location'),
-          ),
-          TextButton(
-            onPressed: () {
-              _stopListening();
-            },
-            child: const Text("Stop live location"),
-          ),
           Expanded(
             child: StreamBuilder(
               stream: FirebaseFirestore.instance.collection('location').snapshots(),

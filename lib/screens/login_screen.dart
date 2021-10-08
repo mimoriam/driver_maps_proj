@@ -17,6 +17,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // Custom:
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
+import 'non_login_home_screen.dart';
+
 class LoginPage extends StatefulWidget {
   final FirebaseAuth auth;
   final FirebaseFirestore firestore;
@@ -53,6 +55,17 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      TextButton(
+                        child: const Text("Click here to check the map routes!"),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NonLoginHomePage(auth: _auth, firestore: _firestore),
+                            ),
+                          );
+                        },
+                      ),
                       FormBuilderTextField(
                         name: 'email',
                         validator: FormBuilderValidators.compose([

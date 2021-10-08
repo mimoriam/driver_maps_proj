@@ -16,9 +16,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Custom:
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 // Global state via provider resides here:
-class RootStateProvider extends ChangeNotifier {}
+class RootStateProvider extends ChangeNotifier {
+  String name = "Null";
+
+  void changeNames(String n) async {
+    name = n;
+    notifyListeners();
+  }
+
+}
 
 class Root extends StatefulWidget {
   const Root({Key? key}) : super(key: key);
