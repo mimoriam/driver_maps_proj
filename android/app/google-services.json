@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "349654337261",
+    "project_id": "driver-maps-proj",
+    "storage_bucket": "driver-maps-proj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349654337261:android:cf62f492b18680ef2feee4",
+        "android_client_info": {
+          "package_name": "com.mnsuet.drivermaps.driver_maps_proj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349654337261-t47mfg6mq0th0u5j99esrd3kc8ogqc4l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mnsuet.drivermaps.driver_maps_proj",
+            "certificate_hash": "22185f2f392a14925a9920726a5ddee8f09c82a5"
+          }
+        },
+        {
+          "client_id": "349654337261-7jl1cgdb7r715nf6eoafcq2t1ipbfc32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD84fn0pFdFj4bGde18AaTVc_ZBrvWfUNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349654337261-7jl1cgdb7r715nf6eoafcq2t1ipbfc32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mnsuet.drivermaps.driver_maps_proj">
+
+    <!-- Custom perms: -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
    <application
         android:label="driver_maps_proj"
         android:icon="@mipmap/ic_launcher">
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyDe4xUDaiPFOWa15R9a0VIde0l_l4WqCec"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

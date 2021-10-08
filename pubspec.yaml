@@ -36,7 +36,14 @@ dependencies:
   cupertino_icons: ^1.0.3
   provider: ^6.0.1
   shared_preferences: ^2.0.8
+  permission_handler: ^8.2.2
   connectivity_plus: ^2.0.2
+  location: ^4.3.0
+  google_maps_flutter: ^2.0.11
+
+  # Firebase related:
+  firebase_core: ^1.7.0
+  cloud_firestore: ^2.5.3
 
 dependency_overrides:
   provider: ^6.0.1
